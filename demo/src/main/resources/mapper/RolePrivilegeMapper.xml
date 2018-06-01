@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glab.mapper.RolePrivilegeMapper">
+    <resultMap id="BaseResultMap" type="com.glab.pojo.entity.RolePrivilege">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+        <result column="privilege_id" jdbcType="BIGINT" property="privilegeId"/>
+        <result column="datasource" jdbcType="VARCHAR" property="datasource"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, role_id, privilege_id, datasource, is_delete, create_time, update_time
+    </sql>
+
+    <insert id="insertBatch" parameterType="List">
+        insert into role_privilege
+        (id, role_id, privilege_id,privilege_code, datasource, is_delete, create_time, update_time)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.id, jdbcType=BIGINT},
+            #{item.roleId,jdbcType=BIGINT},
+            #{item.privilegeId,jdbcType=BIGINT},
+            #{item.privilegeCode,jdbcType=VARCHAR},
+            #{item.datasource,jdbcType=VARCHAR},
+            #{item.isDelete,jdbcType=INTEGER},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+</mapper>
