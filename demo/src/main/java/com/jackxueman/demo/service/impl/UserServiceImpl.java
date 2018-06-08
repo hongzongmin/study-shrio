@@ -1,10 +1,13 @@
 package com.jackxueman.demo.service.impl;
 
+import com.jackxueman.demo.mapper.UserMapper;
+import com.jackxueman.demo.pojo.entity.User;
 import com.jackxueman.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户service实现类
@@ -14,6 +17,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private CacheManager cacheManager;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 清除用户缓存
@@ -33,6 +38,12 @@ public class UserServiceImpl implements UserService {
             cache.evict("countRoles_" + id);
             cache.evict("get_" + id);
         }
+    }
+
+    @Override
+    @Transactional
+    public int adduser(User user) {
+        return userMapper.insert(user);
     }
 
 }

@@ -13,6 +13,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -20,13 +21,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * 授权策略
  */
 public class AuthRealm extends AuthorizingRealm {
 
-    @Lazy
+//    @Lazy
     @Autowired
     private AuthService authService;
 
@@ -47,12 +49,12 @@ public class AuthRealm extends AuthorizingRealm {
         if (user.getDepartmentId() == null) {
             throw new BaseException(ResultCodeEnum.DEPARTMENT_NOT_ASSIGNED);
         }
-        if (authService.countRoles(id) == 0) {
-            throw new BaseException(ResultCodeEnum.ROLE_NOT_ASSIGNED);
-        }
+//        if (authService.countRoles(id) == 0) {
+//            throw new BaseException(ResultCodeEnum.ROLE_NOT_ASSIGNED);
+//        }
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setStringPermissions(authService.listPrivs(id));
+        Set<String> list = authService.listPrivs(id);
         return authorizationInfo;
     }
 
@@ -71,17 +73,27 @@ public class AuthRealm extends AuthorizingRealm {
         if (user.getDepartmentId() == null) {
             throw new BaseException(ResultCodeEnum.DEPARTMENT_NOT_ASSIGNED);
         }
-        if (authService.countRoles(user.getId()) == 0) {
-            throw new BaseException(ResultCodeEnum.ROLE_NOT_ASSIGNED);
-        }
-        if (!authService.checkIpValid(user)) {
-            throw new BaseException(ResultCodeEnum.IP_LIMIT);
-        }
+//        if (authService.countRoles(user.getId()) == 0) {
+//            throw new BaseException(ResultCodeEnum.ROLE_NOT_ASSIGNED);
+//        }
+//        if (!authService.checkIpValid(user)) {
+//            throw new BaseException(ResultCodeEnum.IP_LIMIT);
+//        }
 
         SecurityUtils.getSubject().getSession().setAttribute("user_id", user.getId());
         SecurityUtils.getSubject().getSession().setAttribute("user_name", user.getName());
         SecurityUtils.getSubject().getSession().setAttribute("department_id", user.getDepartmentId());
         return new SimpleAuthenticationInfo(user.getIdentity(), user.getPassword(),
                 ByteSource.Util.bytes(user.getSalt()), this.getName());
+    }
+    /**
+     * 生成密码
+     *
+     * @param salt     盐
+     * @param password 密码
+     * @return
+     */
+    private String generatePassword(String salt, String password) {
+        return new SimpleHash("md5", password, salt, 1).toString();
     }
 }

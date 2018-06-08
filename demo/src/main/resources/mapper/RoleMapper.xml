@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.glab.mapper.RoleMapper">
-    <resultMap id="BaseResultMap" type="com.glab.pojo.entity.Role">
+<mapper namespace="com.jackxueman.demo.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.jackxueman.demo.pojo.entity.Role">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
@@ -15,7 +15,7 @@
         id, name, description, remark, is_delete, create_time, update_time
     </sql>
 
-    <insert id="insert" parameterType="com.glab.pojo.entity.Role" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.jackxueman.demo.pojo.entity.Role" useGeneratedKeys="true" keyProperty="id">
         insert into role
         (id, name, description, remark, is_delete, create_time, update_time)
         values

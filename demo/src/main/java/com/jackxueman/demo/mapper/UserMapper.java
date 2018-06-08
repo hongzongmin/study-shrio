@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * UserMapper
  */
-public interface UserMapper extends UserSrcMapper {
+public interface UserMapper {
 
     /**
      * 插入记录，返回主键
@@ -20,7 +20,6 @@ public interface UserMapper extends UserSrcMapper {
      * @param record
      * @return
      */
-    @Override
     int insert(User record);
 
     int update(@Param("departmentIdList") List<Long> departmentIdList);

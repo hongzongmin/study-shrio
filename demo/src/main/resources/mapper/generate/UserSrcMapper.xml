@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.glab.mapper.generate.UserSrcMapper">
-  <resultMap id="BaseResultMap" type="com.glab.pojo.entity.User">
+<mapper namespace="com.jackxueman.demo.mapper.generate.UserSrcMapper">
+  <resultMap id="BaseResultMap" type="com.jackxueman.demo.pojo.entity.User">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -80,7 +80,7 @@
     id, department_id, status, name, phone, email, identity, password, salt,
     ip_limit, mac_limit, remark, is_delete, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.glab.pojo.entity.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.jackxueman.demo.pojo.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -104,13 +104,13 @@
     delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.glab.pojo.entity.UserExample">
+  <delete id="deleteByExample" parameterType="com.jackxueman.demo.pojo.entity.UserExample">
     delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.glab.pojo.entity.User">
+  <insert id="insert" parameterType="com.jackxueman.demo.pojo.entity.User">
     insert into user (id, department_id, status, 
       name, phone, email, 
       identity, password, salt, 
@@ -124,7 +124,7 @@
       #{remark,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.glab.pojo.entity.User">
+  <insert id="insertSelective" parameterType="com.jackxueman.demo.pojo.entity.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -227,7 +227,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.glab.pojo.entity.UserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.jackxueman.demo.pojo.entity.UserExample" resultType="java.lang.Long">
     select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -311,7 +311,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.glab.pojo.entity.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jackxueman.demo.pojo.entity.User">
     update user
     <set>
       <if test="departmentId != null">
@@ -362,7 +362,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.glab.pojo.entity.User">
+  <update id="updateByPrimaryKey" parameterType="com.jackxueman.demo.pojo.entity.User">
     update user
     set department_id = #{departmentId,jdbcType=BIGINT},
       status = #{status,jdbcType=INTEGER},

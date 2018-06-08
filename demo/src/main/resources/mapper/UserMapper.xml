@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.glab.mapper.UserMapper">
+<mapper namespace="com.jackxueman.demo.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.glab.pojo.entity.User">
+    <resultMap id="BaseResultMap" type="com.jackxueman.demo.pojo.entity.User">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="department_id" jdbcType="BIGINT" property="departmentId"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
@@ -26,7 +26,7 @@
         ip_limit, mac_limit, remark, is_delete, create_time, update_time
     </sql>
 
-    <insert id="insert" parameterType="com.glab.pojo.entity.User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.jackxueman.demo.pojo.entity.User" useGeneratedKeys="true" keyProperty="id">
         insert into user
         (id, department_id, status, name, phone, email, identity, password, salt, police_no,
         ip_limit, mac_limit, remark, is_delete, create_time, update_time)

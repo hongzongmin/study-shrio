@@ -27,6 +27,8 @@ public class User {
 
     private String remark;
 
+    private String policeNo;
+
     private Integer isDelete;
 
     private Date createTime;
@@ -153,6 +155,14 @@ public class User {
         this.updateTime = updateTime;
     }
 
+    public String getPoliceNo() {
+        return policeNo;
+    }
+
+    public void setPoliceNo(String policeNo) {
+        this.policeNo = policeNo;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -171,6 +181,7 @@ public class User {
         sb.append(", ipLimit=").append(ipLimit);
         sb.append(", macLimit=").append(macLimit);
         sb.append(", remark=").append(remark);
+        sb.append(", policeNo=").append(policeNo);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
